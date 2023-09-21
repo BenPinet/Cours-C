@@ -38,31 +38,27 @@ Building& Building::operator=(const Building& rhs){
 int main(int argc , char** argv)
 {
 	std::cout << "Welcome to SimTown ! Please enter the street size" << std::endl; 
-	int index{-99};
-	Building* street[10];
-	for (int i=0; i<10 ; ++i)
+	int size{0};
+	std::cin>>size;
+	
+	Building** street = new Building*[size];
+	for (int ib=0; ib<size ; ++ib)
 	{
-		street[i]=nullptr;
+		street[ib]=new Building(ib)
 	}
-	std::cin >> index;
-	int counter{0};
-	while(index != -99 && counter< 10)
-	{
-		street[counter]= new Building(index);
-		std::cin >> index; 
-		counter++;
-	}
-	for (int i=0; i<10 ; ++i)
+	
+	for (int i=0; i<size ; ++i)
 	{
 		if(street[i] != nullptr)
 		{
 			street[i]->print(std::cout);
 		}
 	}
-	for (int i=0; i<10 ; ++i)
+	for (int i=0; i<size; ++i)
 	{
 		delete street[i];
 	}
+	delete[] street;
 	std::cout << "Done"<<std::endl;
 	return 0;
 }
